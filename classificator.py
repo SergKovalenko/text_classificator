@@ -44,4 +44,7 @@ test_prediction = text_classifier.predict(test_reviews)
 
 from sklearn import metrics
 # print(test_labels)
+
+import sys
 print(metrics.classification_report(test_labels, test_prediction))
+sys.stdout.flush()
