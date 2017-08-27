@@ -1,0 +1,14 @@
+{
+  "name": "text_classificator_seko",
+  "version": "1.0.0",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.15.4",
+    "bootstrap": "^3.3.7"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SergKovalenko/text_classificator.git"
+  }
+}
