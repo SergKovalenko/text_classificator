@@ -9,6 +9,7 @@
 	const errorMessageEl = $('#error-message');
 	let label = '';
 
+
 	likeButton.click(() => {
 		likeButton.addClass('active');
 		dislikeButton.removeClass('active');
@@ -25,8 +26,6 @@
 
 	addButton.click(() => {
 		const review = textarea.val();
-		console.log(review);
-		console.log(label)
 
 		if (!review) {
 			errorMessageEl.text('Please wright the review');
@@ -41,13 +40,17 @@
 			label
 		};
 
+		messageEl.text('Retraining model');
+
 	    $.ajax({
     	    data : JSON.stringify(data),
     		contentType : 'application/json',
 	        type: "POST",
 	        url: '/addData',
 	        success(data) {
-	        	console.log(JSON.parse(data));
+	        	errorMessageEl.text('');
+	        	data = JSON.parse(data);
+	        	messageEl.text(`precision: ${data.precision} \xa0\xa0\xa0\ recall: ${data.recall} \xa0\xa0\xa0\ f1: ${data.f1}`)
 	        }
 	    });
 	});

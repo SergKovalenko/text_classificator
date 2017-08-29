@@ -32,23 +32,6 @@ app.post('/addData', (req, res) => {
 			});
 		})
 	);
-
-
-   //  const writeStreamLabels = fs.createWriteStream(`${root}/data/labels.txt`, { flags: 'a' });
-   //  writeStreamLabels.end(`${req.body.label}\n`, 'utf-8', writeReview);
-
-   //  function writeReview() {
-	  //   const writeStreamReviews = fs.createWriteStream(`${root}/data/reviews.txt`, { flags: 'a' });
-
-	  //   writeStreamReviews.end(`${req.body.review}\n`, 'utf-8', () => {
-	  //   	const process = spawn('python', ["classificator.py"]);
-		 //    process.stdout.on('data', data => {
-		 //    	console.log(data);
-			// 	res.send(data.toString('utf8'))
-			// });
-	  //   });
-   //  }
-
 });
 
 

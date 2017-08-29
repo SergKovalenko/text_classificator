@@ -12,6 +12,7 @@ button {
 
 .messages {
 	height: 20px;
+	margin-bottom: 5px;
 }
 
 .messages p{

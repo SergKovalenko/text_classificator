@@ -1,15 +1,25 @@
 # read data and sort it to 'train' and 'test'
+import random
+
 r = open('data/reviews.txt','r')
 reviews = list(map(lambda x:x[:-1], r.readlines()))
-reviews_train = reviews[0:50]
-test_reviews = reviews[51:100]
 r.close()
 
 l = open('data/labels.txt','r')
 labels = list(map(lambda x:x[:-1].upper(), l.readlines()))
-labels_train = labels[0:50]
-test_labels = labels[51:100]
 l.close()
+
+allData = list(zip(reviews, labels))
+fifth_part = int(len(allData) / 5)
+
+random.shuffle(allData)
+reviews, labels = zip(*allData)
+
+reviews_test = reviews[:fifth_part]
+reviews_train = reviews[fifth_part+1:]
+
+labels_test = labels[:fifth_part]
+labels_train = labels[fifth_part+1:]
 
 
 # text classification
@@ -32,12 +42,12 @@ text_classifier.fit(reviews_train, labels_train)
 import json
 from sklearn import metrics
 
-test_prediction = text_classifier.predict(test_reviews)
+prediction_test = text_classifier.predict(reviews_test)
 
 classification = {
-	'precision': round(metrics.precision_score(test_labels, test_prediction, average='weighted'), 2),
-	'recall': round(metrics.recall_score(test_labels, test_prediction, average='weighted'), 2),
-	'f1': round(metrics.f1_score(test_labels, test_prediction, average='weighted'), 2)
+	'precision': round(metrics.precision_score(labels_test, prediction_test, average='weighted'), 2),
+	'recall': round(metrics.recall_score(labels_test, prediction_test, average='weighted'), 2),
+	'f1': round(metrics.f1_score(labels_test, prediction_test, average='weighted'), 2)
 }
 
 json_data = json.dumps(classification)
