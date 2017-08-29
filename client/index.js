@@ -40,6 +40,7 @@
 			label
 		};
 
+		errorMessageEl.text('')
 		messageEl.text('Retraining model');
 
 	    $.ajax({
@@ -48,9 +49,12 @@
 	        type: "POST",
 	        url: '/addData',
 	        success(data) {
-	        	errorMessageEl.text('');
 	        	data = JSON.parse(data);
 	        	messageEl.text(`precision: ${data.precision} \xa0\xa0\xa0\ recall: ${data.recall} \xa0\xa0\xa0\ f1: ${data.f1}`)
+	        },
+	        error() {
+	        	messageEl.text('');
+	        	errorMessageEl.text('Oops, something went wrong...');
 	        }
 	    });
 	});
