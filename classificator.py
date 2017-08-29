@@ -44,7 +44,16 @@ test_prediction = text_classifier.predict(test_reviews)
 
 from sklearn import metrics
 # print(test_labels)
+# precision, recall, F1
+import json
+
+classification = {
+	'precision': round(metrics.precision_score(test_labels, test_prediction, average='weighted'), 2),
+	'recall': round(metrics.recall_score(test_labels, test_prediction, average='weighted'), 2),
+	'f1': round(metrics.f1_score(test_labels, test_prediction, average='weighted'), 2)
+}
+json_data = json.dumps(classification)
 
 import sys
-print(metrics.classification_report(test_labels, test_prediction))
+print(json_data)
 sys.stdout.flush()

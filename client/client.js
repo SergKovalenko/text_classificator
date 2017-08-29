@@ -5,7 +5,9 @@
 	const likeButton = $('#likeButton');
 	const dislikeButton = $('#dislikeButton');
 	const addButton = $('#addButton');
-	let label = null;
+	const trainDataElement = $('#trainData');
+	const trainData = '';
+	let label = '';
 
 	likeButton.click(() => {
 		console.log('like');
@@ -25,22 +27,21 @@
 
 	addButton.click(() => {
 		console.log('add');
-		const value = textarea.val();
+		const review = textarea.val();
 
 		const data = {
-			value: textarea.val(),
+			review,
 			label
 		};
-
-		console.log(JSON.stringify(data))
 
 	    $.ajax({
     	    data : JSON.stringify(data),
     		contentType : 'application/json',
 	        type: "POST",
 	        url: '/addData',
-	        success() {
-	        	console.log("Done!"); 
+	        success(data) {
+	        	console.log(JSON.parse(data));
+	        	trainDataElement.text(data);
 	        }
 	    });
 	});

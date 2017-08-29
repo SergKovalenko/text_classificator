@@ -4,18 +4,29 @@ const app = express();
 const bodyParser = require('body-parser');
 
 const spawn = require("child_process").spawn;
-const process = spawn('python', ["classificator.py"]);
+const root = __dirname;
 
 app.use(express.static(__dirname + '/client'))
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-	res.sendFile('/client/index.html', { root: __dirname });
+	res.sendFile('/client/index.html', { root });
 });
 
 app.post('/addData', (req, res) => {
-    // const writeStream = fs.createWriteStream(csvPath, { flags: 'a' });
-    console.log(req.body);
+    const writeStreamLabels = fs.createWriteStream(`${root}/data/labels.txt`, { flags: 'a' });
+    const writeStreamReviews = fs.createWriteStream(`${root}/data/reviews.txt`, { flags: 'a' });
+
+    writeStreamLabels.end(`${req.body.label}\n`, 'utf-8');
+
+    writeStreamReviews.end(`${req.body.review}\n`, 'utf-8', () => {
+    	const process = spawn('python', ["classificator.py"]);
+	    process.stdout.on('data', data => {
+	    	console.log(data);
+			res.send(data.toString('utf8'))
+		});
+    });
+    
     // return Promise.map(csvData, (data, index) => {
     //     return new Promise((resolve, reject) => {
     //         if (index !== data.length - 1) {
@@ -27,11 +38,10 @@ app.post('/addData', (req, res) => {
     //         writeStream.on('error', reject);
     //     });
     // }, { concurrency: 10 });
+
 });
 
-process.stdout.on('data', data => {
-	console.log(data.toString('utf8'));
-});
+
 
 app.listen(8080, () => {
 	console.log('Use localhost:8080');
