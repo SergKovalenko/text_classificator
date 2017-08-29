@@ -2,15 +2,14 @@
 	"use strict";
 
 	const textarea = $('#review');
-	const likeButton = $('#likeButton');
-	const dislikeButton = $('#dislikeButton');
-	const addButton = $('#addButton');
-	const trainDataElement = $('#trainData');
-	const trainData = '';
+	const likeButton = $('#like-button');
+	const dislikeButton = $('#dislike-button');
+	const addButton = $('#add-button');
+	const messageEl = $('#message');
+	const errorMessageEl = $('#error-message');
 	let label = '';
 
 	likeButton.click(() => {
-		console.log('like');
 		likeButton.addClass('active');
 		dislikeButton.removeClass('active');
 
@@ -18,7 +17,6 @@
 	});
 
 	dislikeButton.click(() => {
-		console.log('dislike');
 		dislikeButton.addClass('active');
 		likeButton.removeClass('active');
 
@@ -26,8 +24,17 @@
 	});
 
 	addButton.click(() => {
-		console.log('add');
 		const review = textarea.val();
+		console.log(review);
+		console.log(label)
+
+		if (!review) {
+			errorMessageEl.text('Please wright the review');
+			return
+		} else if (!label) {
+			errorMessageEl.text('Please check "Good" or "Bad"');
+			return
+		}
 
 		const data = {
 			review,
@@ -41,7 +48,6 @@
 	        url: '/addData',
 	        success(data) {
 	        	console.log(JSON.parse(data));
-	        	trainDataElement.text(data);
 	        }
 	    });
 	});

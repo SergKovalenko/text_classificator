@@ -4,24 +4,32 @@
     	<title ng-bind="pageTitle">Sirv</title>
     	<meta charset="utf-8">
     	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    	<link rel="stylesheet" type="text/css" href="index.css">
   	</head>
   	<body>
-  		<div class='conteiner'>
-		  	<div class="form-group">
-			  	<label for="review">Review:</label>
-			  	<textarea class="form-control" rows="5" id="review"></textarea>
+  		<div class='container'>
+  			<div class="row">
+			  	<div class="form-group textarea">
+				  	<label for="review">Review:</label>
+				  	<textarea class="form-control" rows="5" id="review" placeholder="Write movie review here"></textarea>
+				</div>
 			</div>
-		  	<div class="btn-group" role="group">
-			  	<button class="btn btn-default" id="likeButton"><span class="glyphicon glyphicon-thumbs-up"></span> Good</button>
-			  	<button class="btn btn-default" id="dislikeButton"><span class="glyphicon glyphicon-thumbs-down"></span> Bad</button>
+			<div class="row">
+				<div class="messages">
+					<p id="error-message"></p>
+					<p id="message"></p>
+				</div>
 			</div>
-			<button class="btn btn-primary" id="addButton">Add</button>
-			<div>
-				<p id="trainData" style="white-space:pre-wrap"></p>
+			<div class="row">
+				  	<div class="btn-group" role="group" class="">
+					  	<button class="btn btn-default" id="like-button"><span class="glyphicon glyphicon-thumbs-up"></span> Good</button>
+					  	<button class="btn btn-default" id="dislike-button"><span class="glyphicon glyphicon-thumbs-down"></span> Bad</button>
+					</div>
+				<button class="btn btn-primary" id="add-button">Add</button>
 			</div>
 			<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 	    	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	    	<script src="client.js"></script>
+	    	<script src="index.js"></script>
 	    </div>
  	</body>
 </html>

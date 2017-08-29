@@ -1,0 +1,28 @@
+button {
+	width: 120px;
+}
+
+.btn-group {
+	margin-right: 20px;
+}
+
+.textarea {
+	padding-top: 50px;
+}
+
+.messages {
+	height: 20px;
+}
+
+.messages p{
+	margin-bottom: 0px;
+}
+
+
+#review {
+	resize: none;
+}
+
+#error-message {
+	color: red;
+}
